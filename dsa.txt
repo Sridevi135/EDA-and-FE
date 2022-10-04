@@ -1,0 +1,310 @@
+1)reverse array
+arr=[1,2,3,4,5]
+i=0
+j=len(arr)-1
+while i<j:
+    arr[i],arr[j]=arr[j],arr[i]
+    i+=1
+    j-=1
+print(arr)
+
+2)find max,min in array
+def getmaxmin(high,low):
+    #1 ele
+    maxi=arr[high]
+    mini=arr[low]
+    if low==high:
+        maxi=arr[low]
+        mini=arr[low]
+        return maxi,mini
+    #2 ele
+    elif high==low+1:
+        if arr[high]>arr[low]:
+            maxi=arr[high]
+            mini=arr[low]
+        else:
+            maxi=arr[low]
+            mini=arr[high]
+        return maxi,mini
+    #>2 ele
+    else:
+        mid=int((low+high)/2)
+        max1,min1=getmaxmin(low,mid)
+        max2,min2=getmaxmin(mid+1,high)
+    return (max(max1,max2),min(min1,min2))
+arr=[75,3,41,2,534,3,4,5,6]
+low=0
+high=len(arr)-1
+print(getmaxmin(low,high))
+
+3)kth smallest element
+solu1:
+arr = [12, 3, 5, 7, 19]
+N = len(arr)
+K = 4
+s = set(arr)
+for itr in s:
+    if K == 1:
+        print(itr)  
+        break
+    K -= 1
+
+solu2:
+def kthele(k):
+    arr=[75,3,41,2,534,3,4,5,6]
+    arr.sort()
+    return arr[k-1]
+print(kthele(4))
+
+4)sort an array of 0,1,2/dutch national flag problem
+solu1:
+inp=[0,1,2,0,1,2]
+low=0
+mid=0
+hi=len(inp)-1
+while hi>=mid:
+    if inp[mid]==0:
+        inp[mid],inp[low]=inp[low],inp[mid]
+        low+=1
+        mid+=1
+    elif inp[mid]==1:
+        mid+=1
+    elif inp[mid]==2:
+        inp[mid],inp[hi]=inp[hi],inp[mid]
+        hi-=1
+print(inp)
+
+5)move negative numbers to left
+solu1:
+arr = [-1, 2, -3, 4, 5, 6, -7, 8, 9]
+i=0
+for j in range(0,len(arr)):
+    if arr[j]<0:
+        temp=arr[j]
+        arr[j]=arr[i]
+        arr[i]=temp
+        i+=1
+print(sorted(arr))
+
+solu2:
+def rearrange():
+    arr = [-1, 2, -3, 4, 5, 6, -7, 8, 9]
+    return(sorted(arr))
+print(rearrange())
+
+solu3:
+def func():
+    arr=[-12, 11, -13, -5,6, -7, 5, -3, 11]
+    left=0
+    right=len(arr)-1
+    while left<=right:
+        if arr[left]<0 and arr[right]<0:
+            left+=1
+        elif arr[left]>0 and arr[right]>0:
+            r-=1
+        elif arr[left]>0 and arr[right]<0:
+            arr[left],arr[right]=arr[right],arr[left]
+        else:
+            left+=1
+            right-=1
+    return sorted(arr)
+print(func())
+
+solu4:
+def reArrange():
+    arr=[-12, 11, -13, -5,6, -7, 5, -3, 11]
+    n=len(arr)
+    low, high = 0, n - 1
+    while (low < high):
+        if (arr[low] < 0):
+            low += 1
+        elif (arr[high] > 0):
+            high -= 1
+        else:
+            arr[low], arr[high] = arr[high], arr[low]
+    return arr
+print(reArrange())
+
+6)union and intersection of array
+solu1:
+def unionsol():
+    a = [7, 1, 5, 2, 3, 6]
+    b = [3, 8, 6, 20, 7]
+    n = 6
+    m=5
+    k={}
+    for i in range(n):
+        k[a[i]]=i
+    for i in range(m):
+        k[b[i]]=i
+    for i in k.keys():
+        print(i,end=' ')
+unionsol()
+
+solu2:
+arr1= [7, 1, 5, 2, 3, 6]
+arr2= [3, 8, 6, 20, 7]
+inter=[]
+inter1=[]
+arr3=arr1+arr2
+print(arr3)
+for i in arr3:
+    if i not in inter:
+        inter.append(i)
+    else:
+        inter1.append(i)
+print(inter1)
+
+solu3:
+def printUnion(arr1, arr2, n1, n2):
+    hs = set()
+    for i in range(n1):
+        hs.add(arr1[i])
+    for i in range(n2):
+        hs.add(arr2[i])
+    print("Union:")
+    for i in hs:
+        print(i, end=" ")
+    print("\n")
+def printIntersection(arr1, arr2, n1, n2):
+    hs = set()
+    for i in range(0, n1):
+        hs.add(arr1[i])
+    print("Intersection:")
+    for i in range(0, n2):
+        if arr2[i] in hs:
+            print(arr2[i], end=" ")
+arr1 = [7, 1, 5, 2, 3, 6]
+arr2 = [3, 8, 6, 20, 7]
+n1 = len(arr1)
+n2 = len(arr2)
+printUnion(arr1, arr2, n1, n2)
+printIntersection(arr1, arr2, n1, n2)
+
+7)rotate an array
+solu1:
+def rotate(arr, n):
+    x = arr[n - 1]
+    for i in range(n - 1, 0, -1):
+        arr[i] = arr[i - 1]
+    arr[0] = x
+arr = [1, 2, 3, 4, 5]
+n = len(arr)
+print("Given array is")
+for i in range(0, n):
+    print(arr[i], end=' ')
+rotate(arr, n)
+print("\nRotated array is")
+for i in range(0, n):
+    print(arr[i], end=' ')
+
+solu2:
+def rotate(arr, n):
+    i = 0
+    j = n - 1
+    while i != j:
+        arr[i], arr[j] = arr[j], arr[i]
+        i = i + 1
+    pass
+arr = [1, 2, 3, 4, 5]
+n = len(arr)
+print("Given array is")
+for i in range(0, n):
+    print(arr[i], end=' ')
+rotate(arr, n)
+print("\nRotated array is")
+for i in range(0, n):
+    print(arr[i], end=' ')
+
+solu3:
+def rotateArray(array):
+    array[:] = array[-1:] + array[:-1]
+array = [1, 2, 3, 4, 5]
+rotateArray(array)
+print(array)
+
+solu4:
+arr = [1, 2, 3, 4, 5]
+arr1=arr.pop()
+print(arr1)
+arr.insert(0,arr1)
+print(arr)
+
+
+8)Largest Sum Contiguous Subarray (Kadane’s Algorithm)
+def maximumSubarraySum(arr):
+    n = len(arr)
+    maxSum = -1e8
+    currSum = 0
+    for i in range(0, n):
+        currSum = currSum + arr[i]
+        if (currSum > maxSum):
+            maxSum = currSum
+        if (currSum < 0):
+            currSum = 0
+    return maxSum
+if __name__ == "__main__":
+    print(maximumSubarraySum([1, 3, 8, -2, 6, -8, 5]));
+
+9)Minimize the maximum difference between the heights *
+def getMinDiff(arr, n, k):
+    arr.sort()
+    ans = arr[n - 1] - arr[0]
+    tempmin = arr[0]
+    tempmax = arr[n - 1]
+    for i in range(1, n):
+        if arr[i] < k:
+            continue
+        tempmin = min(arr[0] + k, arr[i] - k)
+        tempmax = max(arr[i - 1] + k, arr[n - 1] - k)
+        ans = min(ans, tempmax - tempmin)
+    return ans
+k = 6
+n = 6
+arr = [7, 4, 8, 8, 8, 9]
+ans = getMinDiff(arr, n, k)
+print(ans)
+
+10)Minimum number of jumps (interviewbit.com)
+solu1:
+def minhig():
+    h=[n]*(999)
+    h[0]=0
+    for i in range(n):
+        for j in range(i+1,min(i+arr[i]+1,n)):
+            h[j]=min(h[j],1+h[i])
+    return h[n-1]
+arr = [2, 3, 1, 1, 4]
+n=5
+print(minhig())
+
+solu2:
+def minJump(nums):
+    jumps = 0
+    current_jump_end = 0
+    farthest = 0
+    for i in range(len(nums) - 1):
+        farthest = max(farthest, i + nums[i])
+        if i == current_jump_end:
+            jumps += 1
+            current_jump_end = farthest
+    return jumps
+print(minJump([2, 3, 1, 1, 4]))
+
+11)find duplicates
+n = 7
+l=[]
+array= [1, 2, 3, 6, 3, 6, 1]
+for i in array:
+    if i not in l:
+        l.append(i)
+    else:
+        print(i)
+
+12)Merge two sorted array
+arr1=[4,6,1,4]
+arr2=[7,1,3,5,7]
+arr3=set(arr1+arr2)
+print(sorted(arr3))
+
+13)repeated
